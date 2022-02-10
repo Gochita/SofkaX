@@ -95,6 +95,7 @@ public class Metodos {
                 break;
            }
         }
+        System.out.println("El valor del registro 43 es: "+array[42]);
     }
 
     public static void DEC(int arrayBin[], int posicion) {
@@ -159,4 +160,3 @@ public class Metodos {
 
 
     }
-}
