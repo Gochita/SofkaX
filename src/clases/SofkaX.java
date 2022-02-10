@@ -24,7 +24,41 @@ public class SofkaX {
                 "MOV R2,R42"
         };
 
+
     }
+
+    // subrutina MOV -> Rxx,Ryy → copia el valor del registro Rxx al registro Ryy;
+    private static void mov (String datos){
+        var valores = datos.split(",");
+
+        try {
+            registros.put(valores[1], Integer.parseInt(valores[0]));
+        } catch (NumberFormatException exception) {
+            registros.put(valores[1], registros.get(valores[0]));
+        }
+    }
+    // subrutina ADD -> copia la constante numérica d (especificada como un número decimal) al registro Rxx;
+    private static void add (String datos){
+        var valores = datos.split(",");
+        var rxx = registros.get(valores[0]);
+        var ryy = registros.get(valores[1]);
+
+        // operación
+        registros.put(valores[0], rxx + ryy);
+    }
+
+    // subrutina DEC -> disminuye el valor de Rxx en 1. Si el valor del registro es 0, al disminuirlo se genera un desbordamiento y su resultado sería 232–1
+    private static void dec (String datos) {
+        var registro0 =  registros.get(datos);
+        var calculo = (int) Math.pow(2, 32) - 1;
+
+        if (registro0 == 0) {
+            registros.put(datos, calculo);
+        } else {
+            registros.put(datos, registros.get(datos) - 1);
+        }
+    }
+
 
 
 }
