@@ -3,13 +3,13 @@ package clases;
 public class Metodos {
     public static void main(String[] args) {
         int[] array = new int[43];
-        int posicion1 = 0, posicion2 = 0, d = 0, cont=0;
-        String sub = "", x[], t[], c[], f, h;
-
+        int posicion1 = 0, posicion2 = 0, d = 0, cont = 0;
+        String sub = "", x[], c[], f, h;
+        String t[] = new String[5];
 
         String subrutina[] = {
                 "MOV 5,R00",
-                "MOV 10,R01",
+                "MOV2 10,R01",
                 "JZ 7",
                 "ADD R02,R01",
                 "DEC R00",
@@ -22,10 +22,13 @@ public class Metodos {
         for (int i = 0; i < subrutina.length; i++) {
 
             int q;
-            f = subrutina[0];
+            f = subrutina[i];
             x = f.split(" ");
             h = x[1];
-            t = h.split(",");
+            t[0]=h;
+            if (h.contains(",")) {
+                t = h.split(",");
+            }
             if (t[0].contains("R")) {
                 f = t[0];
                 c = f.split("R");
@@ -60,29 +63,29 @@ public class Metodos {
                     break;
 
                 case "DEC":
-                    DEC(array,posicion1);
+                    DEC(array, posicion1);
                     cont++;
                     break;
                 case "INC":
-                    INC(array,posicion1);
+                    INC(array, posicion1);
                     cont++;
                     break;
                 case "INV":
-                    INV(array,posicion1);
+                    INV(array, posicion1);
                     cont++;
                     break;
                 case "JMP":
-                    q=JMP(cont,d);
+                    q = JMP(cont, d);
                     cont++;
-                    if(q!=0){
-                        i=q;
+                    if (q != 0) {
+                        i = q;
                     }
                     break;
                 case "JZ":
-                    q=JZ(array, cont, d);
+                    q = JZ(array, cont, d);
                     cont++;
-                    if(q!=0){
-                        i=q;
+                    if (q != 0) {
+                        i = q;
                     }
                     break;
                 default:
@@ -90,12 +93,12 @@ public class Metodos {
                     break;
 
             }
-           if(cont == 1024){
-               System.out.println("Ya no se puede más :P");
+            if (cont == 1024) {
+                System.out.println("Ya no se puede más :P");
                 break;
-           }
+            }
         }
-        System.out.println("El valor del registro 43 es: "+array[42]);
+        System.out.println("El valor del registro 43 es: " + array[42]);
     }
 
     public static void DEC(int arrayBin[], int posicion) {
@@ -145,18 +148,18 @@ public class Metodos {
     }
 
 
-        public static int JZ ( int arraybin[], int x, int d){
-            if (d < x && arraybin[0] == 0) {
-                return d;
-            } else {
-                System.out.println("la instruccion deseada no es correcta o el registro 00 no es igual a 0");
-            }
-            return 0;
+    public static int JZ(int arraybin[], int x, int d) {
+        if (d < x && arraybin[0] == 0) {
+            return d;
+        } else {
+            System.out.println("la instruccion deseada no es correcta o el registro 00 no es igual a 0");
         }
-
-        public static void NOP () {
-            System.out.println("Yo no hago nada :P");
-        }
-
-
+        return 0;
     }
+
+    public static void NOP() {
+        System.out.println("Yo no hago nada :P");
+    }
+
+
+}
