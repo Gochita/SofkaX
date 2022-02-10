@@ -14,7 +14,15 @@ public class SofkaX {
     private static int contador = 0;
 
     public static void main(String[] args) {
-
+        String[] subrutina = {
+                "MOV 5,R0",
+                "MOV 10,R1",
+                "JZ 7",
+                "ADD R2,R1",
+                "DEC R0",
+                "JMP 3",
+                "MOV R2,R42"
+        };
 
     }
 
